@@ -1,52 +1,83 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-  <title>連戦勇者：魔王討伐の旅</title>
+    <meta charset="UTF-8">
+    <title>連戦勇者：魔王討伐の旅</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 10;
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 6;
+            color: #BA55D3;
+        }
+
+        .player-status {
+            font-size: 5;
+            color: white;
+        }
+
+        .gold-text {
+            color: gold;
+        }
+
+        .ranking {
+            color: gold;
+        }
+    </style>
 </head>
-<body bgcolor="black">
-  <div align="center">
-    <br>
-    <font color=white><font size="10">連戦勇者</font></font><br>
-    <font size="6"><font color=#BA55D3>魔王討伐の旅<br>〜モンスターを倒し続けろ！〜</font></font><br><br><br>
-    <font color=white><font size="5">ーーーーーー<br>勇者NS<br>LV:1<br>HP:10<br>ーーーーーー<br>
-      <form action="battle_top.html" method="POST">
-        <label for="job">戦闘スタイル: 戦士</label><br>
-        <input type="hidden" name="ranking" value="0">
-        <input type="hidden" name="lasttime" value="0">
-        <input type="radio" name="job" value="戦士" checked>戦士<br>
-        <input type="radio" name="job" value="魔法使い">魔法使い<br>
-        <input type="submit" value="職業変更">
-      </form>
-      <br><br>
-      <font color=Gold>ランキング１位：0勝</font><br>
-      前回：0勝<br><br>
-      現在：0勝<br><br>
-      <form action="battle.html" method="POST">
-        <input type="hidden" name="job" value="戦士">
-        <input type="hidden" name="player_lv" value="1">
-        <input type="hidden" name="player_hp" value="10">
-        <input type="hidden" name="monster_hp" value="15">
-        <input type="hidden" name="level" value="0">
-        <input type="hidden" name="cost" value="1">
-        <input type="hidden" name="hp" value="10">
-        <input type="hidden" name="attack" value="5">
-        <input type="hidden" name="B" value="0">
-        <input type="hidden" name="win" value="0">
-        <input type="hidden" name="b_suu" value="1">
-        <input type="hidden" name="ranking" value="0">
-        <input type="hidden" name="lasttime" value="0">
-        <input type="submit" name="start" value="冒険開始！！">
-      </form><br>
-      <form action="battle_top.html" method="POST">
-        <input type="hidden" name="job" value="戦士">
-        <input type="hidden" value= name="player_lv">
-        <input type="hidden" value= name="player_hp">
-        <input type="hidden" value= name="win">
-        <input type="hidden" name="ranking" value="0">
-        <input type="hidden" name="lasttime" value="0">
-        <input type="submit" value="はじめから">
-      </form>
-    </font>
-  </div>
+<body>
+    <div align="center">
+        <br>
+        <div class="title">連戦勇者</div>
+        <div class="subtitle">魔王討伐の旅<br>〜モンスターを倒し続けろ！〜</div>
+        <br><br><br>
+        <div class="player-status">ーーーーーー<br>勇者NS<br>LV:1<br>HP:10<br>ーーーーーー</div>
+        <form action="battle_top.html" method="POST">
+            <label for="job">戦闘スタイル: 戦士</label><br>
+            <input type="hidden" name="ranking" value="0">
+            <input type="hidden" name="lasttime" value="0">
+            <input type="radio" name="job" value="戦士" checked>戦士<br>
+            <input type="radio" name="job" value="魔法使い">魔法使い<br>
+            <input type="submit" value="職業変更">
+        </form>
+        <br><br>
+        <div class="gold-text">ランキング１位：0勝</div>
+        <div>前回：0勝</div><br>
+        <div>現在：0勝</div><br>
+        <form action="battle.html" method="POST">
+            <input type="hidden" name="job" value="戦士">
+            <input type="hidden" name="player_lv" value="1">
+            <input type="hidden" name="player_hp" value="10">
+            <input type="hidden" name="monster_hp" value="15">
+            <input type="hidden" name="level" value="0">
+            <input type="hidden" name="cost" value="1">
+            <input type="hidden" name="hp" value="10">
+            <input type="hidden" name="attack" value="5">
+            <input type="hidden" name="B" value="0">
+            <input type="hidden" name="win" value="0">
+            <input type="hidden" name="b_suu" value="1">
+            <input type="hidden" name="ranking" value="0">
+            <input type="hidden" name="lasttime" value="0">
+            <input type="submit" name="start" value="冒険開始！！">
+        </form><br>
+        <form action="battle_top.html" method="POST">
+            <input type="hidden" name="job" value="戦士">
+            <input type="hidden" value= name="player_lv">
+            <input type="hidden" value= name="player_hp">
+            <input type="hidden" value= name="win">
+            <input type="hidden" name="ranking" value="0">
+            <input type="hidden" name="lasttime" value="0">
+            <input type="submit" value="はじめから">
+        </form>
+    </div>
 </body>
 </html>
