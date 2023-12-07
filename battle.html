@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG風バトル</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <h1>ーーーーーーーバトルーーーーーーー</h1>
+        <div id="monsterContainer"></div>
+        <button onclick="startBattle()">スタート</button>
+        <button onclick="performBattle()">たたかう</button>
+        <button onclick="levelUp()">レベルアップ</button>
+        <p id="resultMessage"></p>
+        <p id="playerStatus"></p>
+    </div>
+
+    <script>
+        let player = {
+            level: 1,
+            hp: 10,
+            attack: 5
+        };
+
+        let monster = {
+            type: "",
+            hp: 0
+        };
+
+        let battleCount = 0;
+        let winCount = 0;
+        let cost = 1;
+
+        function startBattle() {
+            battleCount++;
+            let monsterTypes = ["スライム", "スライム2", "ゴブリン", "魔道士", "ミノタウロス"];
+            let num = Math.floor(Math.random() * monsterTypes.length);
+            monster.type = monsterTypes[num];
+            
+            if (battleCount % 20 === 0) {
+                monster.type = "魔王";
+                monster.hp = player.level + 30 + Math.floor(Math.random() * 21);
+            } else {
+                monster.hp = player.level + 1 + Math.floor(Math.random() * 16);
+            }
+
+            displayMonster();
+            displayResult("モンスターが現れた！！");
+        }
+
+        function performBattle() {
+            monster.hp -= player.attack;
+            displayResult(`勇者NSの攻撃！<br>モンスターに${player.attack}のダメージ与えた！`);
+
+            if (monster.hp <= 0) {
+                winCount++;
+                levelUp();
+            } else {
+                monsterAttack();
+            }
+        }
+
+        function monsterAttack() {
+            let monsterAttack = Math.floor(Math.random() * (player.level + 3));
+            player.hp -= monsterAttack;
+            
+            if (player.hp <= 0) {
+                player.hp = 0;
+                displayResult(`モンスターの攻撃！<br><font color="red">${monsterAttack}のダメージ</font>を受けた！<br>やられてしまった...`);
+            } else {
+                displayResult(`モンスターの攻撃！<br><font color="red">${monsterAttack}のダメージ</font>を受けた！`);
+                displayPlayerStatus();
+            }
+        }
+
+        function levelUp() {
+            if (monster.hp <= 0) {
+                displayResult("モンスターを倒した！");
+
+                if (monster.type === "魔王") {
+                    displayResult("魔王を倒した！！");
+                }
+
+                player.level++;
+                player.hp = Math.floor(Math.random() * 4) + 2;
+                cost++;
+
+                if (monster.type === "魔道士") {
+                    player.level += 3;
+                } else if (monster.type === "ゴブリン") {
+                    player.level += 2;
+                }
+
+                displayResult(`<font color="lightgreen">レベルアップ！！　　〜HP回復〜</font>`);
+            }
+
+            displayPlayerStatus();
+            displayMonster();
+            displayResult("ーーーーーーーーーーーーーーーーー");
+        }
+
+        function displayMonster() {
+            let monsterContainer = document.getElementById("monsterContainer");
+            let imageSource = `${monster.type}.PNG`;
+            let imageTag = `<img src="${imageSource}" width="250" alt="${monster.type}">`;
+            monsterContainer.innerHTML = imageTag;
+        }
+
+        function displayResult(message) {
+            let resultMessage = document.getElementById("resultMessage");
+            resultMessage.innerHTML = message;
+        }
+
+        function displayPlayerStatus() {
+            let playerStatus = document.getElementById("playerStatus");
+            playerStatus.innerHTML = `<font size="5">勇者NS<br>LV:${player.level}<br>HP:${player.hp}</font><br><br>`;
+        }
+    </script>
+</body>
+</html>
